@@ -33,6 +33,8 @@ public class FamilyTree
         {
             // Add childNode to this node's children list. Also
             // set childNode's parent to this node.
+        	children.add(childNode);
+        	childNode.parent = this;
         }
         
         
@@ -41,14 +43,16 @@ public class FamilyTree
         TreeNode getNodeWithName(String targetName)
         {
             // Does this node have the target name?
-            if (?????)
-                return this;
+            if (this.getName().equals(targetName))return this;
                     
             // No, recurse. Check all children of this node.
-            for (TreeNode child: children)
+            for (TreeNode child: this.children)
             {
                 // If child.getNodeWithName(targetName) returns a non-null node,
                 // then that's the node we're looking for. Return it.
+            	TreeNode bb = child.getNodeWithName(targetName);
+            	if(bb != null) return bb;
+            	
             }
             
             // Not found anywhere.
@@ -66,6 +70,11 @@ public class FamilyTree
             // the nodes of a tree is like traversing a linked list. If that isn’t clear,
             // draw a tree, mark any leaf node, and then mark its ancestors in order from
             // recent to ancient. Expect a question about this on the final exam.
+            TreeNode n = this.parent;
+            while(n != null) {
+            	ancestors.add(n);
+            	n = n.parent;
+            }
 
             return ancestors;
         }
